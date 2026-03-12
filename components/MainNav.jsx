@@ -14,7 +14,7 @@ export default function MainNav() {
 
   return (
     <header className="fixed top-0 left-0 w-full bg-primary text-white p-4 flex justify-between items-center shadow-md z-10">
-      <span className="text-xl font-bold">Yuhan Zhao</span>
+      <span className="text-xl font-bold">The MET</span>
       <nav className="flex items-center gap-6">
         <Link href="/" >Home</Link>
         <Link href="/search">Advanced Search</Link>
