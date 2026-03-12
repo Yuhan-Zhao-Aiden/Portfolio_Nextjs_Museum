@@ -2,6 +2,9 @@ import { useForm } from "react-hook-form"
 import { useRouter } from "next/router"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
+import { useAtom } from "jotai"
+import { searchHistoryAtom } from "@/store"
+import { addToHistory } from "@/lib/userData"
 
 export default function AdvancedSearch() {
   const { register, handleSubmit, formState: { errors } } = useForm({
@@ -13,8 +16,9 @@ export default function AdvancedSearch() {
     }
   })
   const router = useRouter()
+  const [, setSearchHistory] = useAtom(searchHistoryAtom)
 
-  const submitForm = (data) => {
+  const submitForm = async (data) => {
     // let queryString = ``;
     // if (data.byTitle) queryString += "title=true";
     // if (data.byTags) queryString += "tags=true";
@@ -29,7 +33,7 @@ export default function AdvancedSearch() {
     queryString.push(`q=${data.q}`);
 
     queryString = queryString.join("&");
-    
+    setSearchHistory(await addToHistory(queryString));
     router.push(`/artwork?${queryString}`)
   }
 

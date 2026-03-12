@@ -2,6 +2,7 @@ import "@/styles/globals.css"
 import { SWRConfig } from "swr"
 import Layout from "@/components/Layout"
 import { useRouter } from "next/router"
+import RouteGuard from "@/components/RouteGuard"
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
@@ -24,9 +25,11 @@ export default function App({ Component, pageProps }) {
           return res.json()
         }
     }}>
-      <Layout currentPath={router.pathname}>
-        <Component {...pageProps} />
-      </Layout>
+      <RouteGuard>
+        <Layout currentPath={router.pathname}>
+          <Component {...pageProps} />
+        </Layout>
+      </RouteGuard>
     </SWRConfig>
   )
 }
